@@ -1,37 +1,35 @@
 from random import randint
 
+# Variable for fold and unfold actions
 FOLD = "fold"
 UNFOLD = "unfold"
 
-print("Hayang (fold), Kulob (unfold)")
-user = input("Enter fold or unfold: ")
+# Generate Vaues for randint
+c2,c3 = (randint(1,2)for _ in range(2))
 
-c2 = randint(1, 2)
-c3 = randint(1, 2)
+# Welcome Message of the Game
+print("FOLD and UNFOLD GAME")
 
-if user == UNFOLD:
-    print("P1: unfold")
-elif user == FOLD:
-    print("P1: fold")
+# Get the user input
+user = input("Enter 'fold' or 'unfold': ").strip().lower()
 
-if c2 == 2:
-    print("C2: unfold")
-else:
-    print("C2: fold")
+# Condition statement for user input
+actions = {UNFOLD: "P1: unfold", FOLD: "P1: fold"}
+print(actions.get(user, "Invalid action"))
 
-if c3 == 2:
-    print("C3: unfold")
-else:
-    print("C3: fold")
+# Condition statement for C2 and C3
+print(f"C2: {UNFOLD if c2 == 2 else FOLD}")
+print(f"C3: {UNFOLD if c3 == 2 else FOLD}")
 
-if (user == FOLD and c2 == 2 and c3 == 2) or (user == UNFOLD and c2 == 1 and c3 == 1):
-    print("You Win")
-elif (user == UNFOLD and c2 == 1 and c3 == 2) or (user == FOLD and c2 == 2 and c3 == 1):
-    print("C2 wins")
-elif (user == UNFOLD and c2 == 2 and c3 == 1) or (user == FOLD and c2 == 1 and c3 == 2):
-    print("C3 wins")
-else:
-    print("Game Draw")
+# Determine the outcome using a dictionary
+outcomes = {
+    (FOLD, 2, 2): "You Win",
+    (UNFOLD, 1, 1): "You Win",
+    (UNFOLD, 1, 2): "C2 wins",
+    (FOLD, 2, 1): "C2 wins",
+    (UNFOLD, 2, 1): "C3 wins",
+    (FOLD, 1, 2): "C3 wins"
+}
 
-
-
+result = outcomes.get((user, c2, c3), "Game Draw")
+print(result)
