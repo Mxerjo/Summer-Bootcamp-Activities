@@ -1,0 +1,14 @@
+SELECT 
+    tbl_customer_info.firstName, 
+    tbl_customer_info.middleName, 
+    tbl_customer_info.lastName,
+    tbl_movie_inventory_info.borrowed
+FROM 
+    tbl_movie_inventory_info 
+JOIN
+	tbl_customer_info ON tbl_movie_inventory_info.customer_id = tbl_customer_info.customer_id 
+WHERE 
+    tbl_customer_info.customer_id 
+    NOT IN 
+    	(SELECT tbl_movie_inventory_info.customer_id 
+         FROM tbl_movie_inventory_info WHERE tbl_movie_inventory_info.borrowed = 'True');

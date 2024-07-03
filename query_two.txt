@@ -1,0 +1,13 @@
+SELECT 
+    tbl_customer_info.firstName,
+    tbl_customer_info.lastName,
+    tbl_movie_info.title,
+    DATE_FORMAT(tbl_rent_info.requestedDate, '%M') AS Month,
+    tbl_rent_info.status
+FROM 
+    tbl_rent_info 
+    INNER JOIN tbl_customer_info ON tbl_rent_info.customer_id = tbl_customer_info.customer_id
+    INNER JOIN tbl_movie_info ON tbl_rent_info.movie_id = tbl_movie_info.movie_id
+ORDER BY 
+    tbl_customer_info.lastName,
+    Month;

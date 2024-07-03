@@ -1,0 +1,14 @@
+SELECT 
+    tbl_customer_info.firstName, 
+    tbl_customer_info.lastName,
+    tbl_movie_inventory_info.borrowed
+FROM 
+    tbl_rent_info 
+JOIN 
+    tbl_customer_info ON tbl_rent_info.customer_id = tbl_customer_info.customer_id
+JOIN 
+    tbl_movie_info ON tbl_rent_info.movie_id = tbl_movie_info.movie_id
+JOIN 
+    tbl_movie_inventory_info ON tbl_movie_info.movie_id = tbl_movie_inventory_info.inventory_id
+WHERE
+    tbl_movie_inventory_info.borrowed = 'True';
